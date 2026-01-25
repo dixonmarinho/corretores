@@ -1,0 +1,3 @@
+Pretty Format
+-------------
+npx prettier --write src/generated/nestjs-dto/*.ts
