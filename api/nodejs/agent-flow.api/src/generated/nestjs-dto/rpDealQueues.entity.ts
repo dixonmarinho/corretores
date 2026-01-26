@@ -1,8 +1,8 @@
-import { Prisma } from '@prisma/client';
 import { ApiProperty } from '@nestjs/swagger';
 import { RpDeals } from './rpDeals.entity';
 import { RpLeads } from './rpLeads.entity';
 import { Profiles } from './profiles.entity';
+import { Prisma } from 'generated/prisma/client';
 
 export class RpDealQueues {
   id: string;

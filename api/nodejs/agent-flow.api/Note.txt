@@ -1,3 +1,21 @@
 Pretty Format
 -------------
 npx prettier --write src/generated/nestjs-dto/*.ts
+
+Gerar DTOs
+-------------
+-- Limpar o Builder no PowerShell
+Remove-Item -Recurse -Force dist
+npx prisma generate
+npm run build
+
+
+Criar uma controller
+nest g resource corretor --no-spec
+
+
+
+A melhor prática atual para acelerar é:
+Gerar DTOs automaticamente (via prisma-generator-nestjs-dto).
+Gerar a estrutura via CLI (nest g resource).
+Conectar os dois manualmente (leva cerca de 2 minutos por tabela).

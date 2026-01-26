@@ -1,5 +1,5 @@
-import { Prisma } from '@prisma/client';
-import { ApiProperty, getSchemaPath } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
+import { Prisma } from 'generated/prisma/client';
 
 export class CreateRpDealQueuesDto {
   queue_type: string;
