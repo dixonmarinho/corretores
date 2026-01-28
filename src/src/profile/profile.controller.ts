@@ -8,15 +8,15 @@ import {
   Delete,
 } from '@nestjs/common';
 import { ProfileService } from './profile.service';
-import { CreateProfileDto } from './dto/create-profile.dto';
-import { UpdateProfileDto } from './dto/update-profile.dto';
+import { ProfilesDto } from 'src/generated/nestjs-dto/profiles.dto';
+import { UpdateProfilesDto } from 'src/generated/nestjs-dto/update-profiles.dto';
 
 @Controller('profile')
 export class ProfileController {
   constructor(private readonly profileService: ProfileService) {}
 
   @Post()
-  create(@Body() createProfileDto: CreateProfileDto) {
+  create(@Body() createProfileDto: ProfilesDto) {
     return this.profileService.create(createProfileDto);
   }
 
@@ -31,7 +31,7 @@ export class ProfileController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProfileDto: UpdateProfileDto) {
+  update(@Param('id') id: string, @Body() updateProfileDto: UpdateProfilesDto) {
     return this.profileService.update(+id, updateProfileDto);
   }
 
