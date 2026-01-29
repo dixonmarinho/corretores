@@ -5,7 +5,7 @@ import { PrismaService } from '../prisma.service';
 export class BaseService<T, CreateDto, UpdateDto> {
   constructor(
     protected readonly prisma: PrismaService,
-    protected readonly model: any // Prisma model delegate
+    protected readonly model: any, // Prisma model delegate
   ) {}
 
   async create(data: CreateDto): Promise<T> {
