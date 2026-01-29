@@ -35,3 +35,4 @@ export class BaseController<CreateDto, UpdateDto> {
     return this.service.remove(+id);
   }
 }
+
