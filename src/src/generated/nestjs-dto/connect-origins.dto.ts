@@ -1,5 +1,3 @@
-
-  export class ConnectOriginsDto {
-    id: string;
-  }
-  
+export class ConnectOriginsDto {
+  id: string;
+}

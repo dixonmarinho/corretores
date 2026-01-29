@@ -1,5 +1,3 @@
-
-  export class ConnectRoDutiesDto {
-    id: string;
-  }
-  
+export class ConnectRoDutiesDto {
+  id: string;
+}

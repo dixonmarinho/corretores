@@ -1,5 +1,3 @@
-
-  export class ConnectRoCustomizedQueuesDto {
-    id: string;
-  }
-  
+export class ConnectRoCustomizedQueuesDto {
+  id: string;
+}

@@ -1,5 +1,3 @@
-
-  export class ConnectPropertiesDto {
-    id: string;
-  }
-  
+export class ConnectPropertiesDto {
+  id: string;
+}

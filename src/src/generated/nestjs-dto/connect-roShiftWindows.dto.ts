@@ -1,5 +1,3 @@
-
-  export class ConnectRoShiftWindowsDto {
-    id: string;
-  }
-  
+export class ConnectRoShiftWindowsDto {
+  id: string;
+}

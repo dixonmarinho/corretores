@@ -1,5 +1,3 @@
-
-  export class ConnectAgencyFallbackStrategiesDto {
-    id: string;
-  }
-  
+export class ConnectAgencyFallbackStrategiesDto {
+  id: string;
+}

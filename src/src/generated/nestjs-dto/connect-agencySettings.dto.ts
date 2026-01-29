@@ -1,5 +1,3 @@
-
-  export class ConnectAgencySettingsDto {
-    id: string;
-  }
-  
+export class ConnectAgencySettingsDto {
+  id: string;
+}

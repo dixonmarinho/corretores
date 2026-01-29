@@ -1,5 +1,3 @@
-
-  export class ConnectRpDealsDto {
-    id: string;
-  }
-  
+export class ConnectRpDealsDto {
+  id: string;
+}

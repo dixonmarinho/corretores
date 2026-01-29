@@ -1,15 +1,11 @@
-
-import {ApiProperty} from '@nestjs/swagger'
-
-
-
+import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdateRpDealsExecutionsDto {
   log?: string;
-additional_info?: string;
-@ApiProperty({
-  type: `string`,
-  format: `date-time`,
-})
-updated_at?: Date;
+  additional_info?: string;
+  @ApiProperty({
+    type: `string`,
+    format: `date-time`,
+  })
+  updated_at?: Date;
 }

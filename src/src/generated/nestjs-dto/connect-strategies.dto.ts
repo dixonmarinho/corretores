@@ -1,5 +1,3 @@
-
-  export class ConnectStrategiesDto {
-    id: string;
-  }
-  
+export class ConnectStrategiesDto {
+  id: string;
+}

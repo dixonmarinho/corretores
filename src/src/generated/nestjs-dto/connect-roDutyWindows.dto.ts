@@ -1,5 +1,3 @@
-
-  export class ConnectRoDutyWindowsDto {
-    id: string;
-  }
-  
+export class ConnectRoDutyWindowsDto {
+  id: string;
+}

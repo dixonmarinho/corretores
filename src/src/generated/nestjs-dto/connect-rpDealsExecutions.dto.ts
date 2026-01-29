@@ -1,6 +1,4 @@
-
-  export class ConnectRpDealsExecutionsDto {
-    id?: string;
-deal_id?: string;
-  }
-  
+export class ConnectRpDealsExecutionsDto {
+  id?: string;
+  deal_id?: string;
+}

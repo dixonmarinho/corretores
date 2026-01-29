@@ -1,5 +1,3 @@
-
-  export class ConnectRoDailyDutiesDto {
-    id: string;
-  }
-  
+export class ConnectRoDailyDutiesDto {
+  id: string;
+}

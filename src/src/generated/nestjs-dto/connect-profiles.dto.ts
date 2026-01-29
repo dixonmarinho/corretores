@@ -1,6 +1,4 @@
-
-  export class ConnectProfilesDto {
-    id?: string;
-crm_code?: number;
-  }
-  
+export class ConnectProfilesDto {
+  id?: string;
+  crm_code?: number;
+}

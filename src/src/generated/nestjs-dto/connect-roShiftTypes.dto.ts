@@ -1,5 +1,3 @@
-
-  export class ConnectRoShiftTypesDto {
-    id: string;
-  }
-  
+export class ConnectRoShiftTypesDto {
+  id: string;
+}

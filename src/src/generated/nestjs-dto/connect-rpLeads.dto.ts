@@ -1,5 +1,3 @@
-
-  export class ConnectRpLeadsDto {
-    id: string;
-  }
-  
+export class ConnectRpLeadsDto {
+  id: string;
+}

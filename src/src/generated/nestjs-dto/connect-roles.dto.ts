@@ -1,6 +1,4 @@
-
-  export class ConnectRolesDto {
-    id?: string;
-name?: string;
-  }
-  
+export class ConnectRolesDto {
+  id?: string;
+  name?: string;
+}

@@ -15,11 +15,13 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
-    "skipLibCheck": true,
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
-    "noImplicitAny": false,
     "strictBindCallApply": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+
+    "strict": false,             // Habilita todas as verificações rigorosas de uma vez
+    "noImplicitAny": false,      // Garante que você saiba quando algo não tem tipo
+    "skipLibCheck": false        // Mantém isso como true para evitar erros em bibliotecas externas    
   }
 }

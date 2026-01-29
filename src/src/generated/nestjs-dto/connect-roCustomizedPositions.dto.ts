@@ -1,5 +1,3 @@
-
-  export class ConnectRoCustomizedPositionsDto {
-    id: string;
-  }
-  
+export class ConnectRoCustomizedPositionsDto {
+  id: string;
+}
