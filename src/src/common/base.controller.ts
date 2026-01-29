@@ -1,3 +1,4 @@
+
 import {
   Get,
   Post,
@@ -6,11 +7,13 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
+import { ApiBody } from '@nestjs/swagger';
 
 export class BaseController<CreateDto, UpdateDto> {
   constructor(protected readonly service: any) {}
 
   @Post()
+  @ApiBody({ type: (null as any as CreateDto)?.constructor })
   create(@Body() createDto: CreateDto) {
     return this.service.create(createDto);
   }
@@ -35,4 +38,3 @@ export class BaseController<CreateDto, UpdateDto> {
     return this.service.remove(+id);
   }
 }
-
