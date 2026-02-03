@@ -1,15 +1,18 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { IsUUID } from 'class-validator';
 
 export class rolettePosition {
   @ApiProperty({ enum: ['DUTY', 'CUSTOM'] })
   contextType: 'DUTY' | 'CUSTOM';
 
-  @ApiProperty()
+  @ApiProperty({ format: 'uuid' })
+  @IsUUID('4')
   keyId: string;
 
-  @ApiProperty()
+  @ApiProperty({ format: 'uuid' })
+  @IsUUID('4')
   profileId: string;
 
-  @ApiProperty()
-  newPosition: number;
+  @ApiProperty({ default: 1 })
+  newPosition: number = 1;
 }
