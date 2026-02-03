@@ -11,7 +11,9 @@ async function bootstrap() {
     .setTitle('Agent Flow API') // Nome do seu projeto
     .setDescription('Documentação da API do Agent Flow')
     .setVersion('1.0')
-    .addTag('users') // Opcional: tags iniciais
+
+    .addTag('Agencies', 'Endpoints relacionados a agências')
+
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
