@@ -24,6 +24,7 @@ import { RolesModule } from './roles/roles.module';
 import { RoCustomizedPositionsModule } from './roCustomizedPositions/roCustomizedPositions.module';
 import { RoCustomizedQueuesModule } from './roCustomizedQueues/roCustomizedQueues.module';
 import { AgencyFallbackStrategiesModule } from './agencyFallbackStrategies/agencyFallbackStrategies.module';
+import { RolettePositionModule } from './rolettePosition/rolettePosition.module';
 
 @Module({
   imports: [
@@ -50,6 +51,7 @@ import { AgencyFallbackStrategiesModule } from './agencyFallbackStrategies/agenc
     RpDealsAgentsModule,
     RpDealsExecutionsModule,
     RpLeadsModule,
+    RolettePositionModule,
   ],
   controllers: [AppController],
   providers: [AppService],
