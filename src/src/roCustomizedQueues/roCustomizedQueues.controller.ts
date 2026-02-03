@@ -5,11 +5,13 @@ import { BaseController } from 'src/common/base.controller';
 import { Controller } from '@nestjs/common';
 
 @Controller('ro-customized-queues')
-export class RoCustomizedQueuesController extends BaseController<
+export class RoCustomizedQueuesController extends BaseController(
   RoCustomizedQueuesDto,
-  UpdateRoCustomizedQueuesDto
-> {
-  constructor(private readonly roCustomizedQueuesService: RoCustomizedQueuesService) {
+  UpdateRoCustomizedQueuesDto,
+) {
+  constructor(
+    private readonly roCustomizedQueuesService: RoCustomizedQueuesService,
+  ) {
     super(roCustomizedQueuesService);
   }
 }

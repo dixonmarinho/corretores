@@ -7,7 +7,10 @@ import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('profile')
 @Controller('profile')
-export class ProfileController extends BaseController<ProfilesDto, UpdateProfilesDto> {
+export class ProfileController extends BaseController(
+  ProfilesDto,
+  UpdateProfilesDto,
+) {
   constructor(private readonly profileService: ProfileService) {
     super(profileService);
   }

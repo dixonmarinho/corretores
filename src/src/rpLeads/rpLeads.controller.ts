@@ -5,10 +5,10 @@ import { BaseController } from 'src/common/base.controller';
 import { Controller } from '@nestjs/common';
 
 @Controller('rp-leads')
-export class RpLeadsController extends BaseController<
+export class RpLeadsController extends BaseController(
   RpLeadsDto,
-  UpdateRpLeadsDto
-> {
+  UpdateRpLeadsDto,
+) {
   constructor(private readonly rpLeadsService: RpLeadsService) {
     super(rpLeadsService);
   }

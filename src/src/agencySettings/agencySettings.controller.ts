@@ -5,10 +5,10 @@ import { BaseController } from 'src/common/base.controller';
 import { Controller } from '@nestjs/common';
 
 @Controller('agency-settings')
-export class AgencySettingsController extends BaseController<
+export class AgencySettingsController extends BaseController(
   AgencySettingsDto,
-  UpdateAgencySettingsDto
-> {
+  UpdateAgencySettingsDto,
+) {
   constructor(private readonly agencySettingsService: AgencySettingsService) {
     super(agencySettingsService);
   }

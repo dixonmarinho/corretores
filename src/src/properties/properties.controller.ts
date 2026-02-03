@@ -5,10 +5,10 @@ import { BaseController } from 'src/common/base.controller';
 import { Controller } from '@nestjs/common';
 
 @Controller('properties')
-export class PropertiesController extends BaseController<
+export class PropertiesController extends BaseController(
   PropertiesDto,
-  UpdatePropertiesDto
-> {
+  UpdatePropertiesDto,
+) {
   constructor(private readonly propertiesService: PropertiesService) {
     super(propertiesService);
   }

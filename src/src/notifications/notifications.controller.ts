@@ -5,10 +5,10 @@ import { BaseController } from 'src/common/base.controller';
 import { Controller } from '@nestjs/common';
 
 @Controller('notifications')
-export class NotificationsController extends BaseController<
+export class NotificationsController extends BaseController(
   NotificationsDto,
-  UpdateNotificationsDto
-> {
+  UpdateNotificationsDto,
+) {
   constructor(private readonly notificationsService: NotificationsService) {
     super(notificationsService);
   }

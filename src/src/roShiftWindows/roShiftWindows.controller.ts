@@ -5,10 +5,10 @@ import { BaseController } from 'src/common/base.controller';
 import { Controller } from '@nestjs/common';
 
 @Controller('ro-shift-windows')
-export class RoShiftWindowsController extends BaseController<
+export class RoShiftWindowsController extends BaseController(
   RoShiftWindowsDto,
-  UpdateRoShiftWindowsDto
-> {
+  UpdateRoShiftWindowsDto,
+) {
   constructor(private readonly roShiftWindowsService: RoShiftWindowsService) {
     super(roShiftWindowsService);
   }

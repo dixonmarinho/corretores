@@ -5,11 +5,13 @@ import { BaseController } from 'src/common/base.controller';
 import { Controller } from '@nestjs/common';
 
 @Controller('rp-deals-executions')
-export class RpDealsExecutionsController extends BaseController<
+export class RpDealsExecutionsController extends BaseController(
   RpDealsExecutionsDto,
-  UpdateRpDealsExecutionsDto
-> {
-  constructor(private readonly rpDealsExecutionsService: RpDealsExecutionsService) {
+  UpdateRpDealsExecutionsDto,
+) {
+  constructor(
+    private readonly rpDealsExecutionsService: RpDealsExecutionsService,
+  ) {
     super(rpDealsExecutionsService);
   }
 }

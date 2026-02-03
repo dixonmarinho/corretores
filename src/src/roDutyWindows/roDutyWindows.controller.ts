@@ -5,10 +5,10 @@ import { BaseController } from 'src/common/base.controller';
 import { Controller } from '@nestjs/common';
 
 @Controller('ro-duty-windows')
-export class RoDutyWindowsController extends BaseController<
+export class RoDutyWindowsController extends BaseController(
   RoDutyWindowsDto,
-  UpdateRoDutyWindowsDto
-> {
+  UpdateRoDutyWindowsDto,
+) {
   constructor(private readonly roDutyWindowsService: RoDutyWindowsService) {
     super(roDutyWindowsService);
   }

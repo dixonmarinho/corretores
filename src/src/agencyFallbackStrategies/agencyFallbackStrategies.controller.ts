@@ -7,8 +7,11 @@ import { BaseController } from 'src/common/base.controller';
 
 @ApiTags('agency-fallback-strategies')
 @Controller('agency-fallback-strategies')
-export class AgencyFallbackStrategiesController extends BaseController<AgencyFallbackStrategiesDto, UpdateAgencyFallbackStrategiesDto> {
-  constructor(protected readonly service: AgencyFallbackStrategiesService) {
+export class AgencyFallbackStrategiesController extends BaseController(
+  AgencyFallbackStrategiesDto,
+  UpdateAgencyFallbackStrategiesDto,
+) {
+  constructor(public readonly service: AgencyFallbackStrategiesService) {
     super(service);
   }
 }

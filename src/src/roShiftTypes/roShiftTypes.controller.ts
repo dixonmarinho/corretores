@@ -5,10 +5,10 @@ import { BaseController } from 'src/common/base.controller';
 import { Controller } from '@nestjs/common';
 
 @Controller('ro-shift-types')
-export class RoShiftTypesController extends BaseController<
+export class RoShiftTypesController extends BaseController(
   RoShiftTypesDto,
-  UpdateRoShiftTypesDto
-> {
+  UpdateRoShiftTypesDto,
+) {
   constructor(private readonly roShiftTypesService: RoShiftTypesService) {
     super(roShiftTypesService);
   }

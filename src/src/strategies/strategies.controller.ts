@@ -5,10 +5,10 @@ import { BaseController } from 'src/common/base.controller';
 import { Controller } from '@nestjs/common';
 
 @Controller('strategies')
-export class StrategiesController extends BaseController<
+export class StrategiesController extends BaseController(
   StrategiesDto,
-  UpdateStrategiesDto
-> {
+  UpdateStrategiesDto,
+) {
   constructor(private readonly strategiesService: StrategiesService) {
     super(strategiesService);
   }

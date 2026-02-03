@@ -5,10 +5,7 @@ import { BaseController } from 'src/common/base.controller';
 import { Controller } from '@nestjs/common';
 
 @Controller('roles')
-export class RolesController extends BaseController<
-  RolesDto,
-  UpdateRolesDto
-> {
+export class RolesController extends BaseController(RolesDto, UpdateRolesDto) {
   constructor(private readonly rolesService: RolesService) {
     super(rolesService);
   }

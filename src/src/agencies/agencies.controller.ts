@@ -7,8 +7,11 @@ import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Agencies')
 @Controller('agencies')
-export class AgenciesController extends BaseController<AgenciesDto, UpdateAgenciesDto> {
-  constructor(protected readonly service: AgenciesService) {
+export class AgenciesController extends BaseController(
+  AgenciesDto,
+  UpdateAgenciesDto,
+) {
+  constructor(public readonly service: AgenciesService) {
     super(service);
   }
 }

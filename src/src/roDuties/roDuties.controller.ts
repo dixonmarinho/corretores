@@ -5,10 +5,10 @@ import { BaseController } from 'src/common/base.controller';
 import { Controller } from '@nestjs/common';
 
 @Controller('ro-duties')
-export class RoDutiesController extends BaseController<
+export class RoDutiesController extends BaseController(
   RoDutiesDto,
-  UpdateRoDutiesDto
-> {
+  UpdateRoDutiesDto,
+) {
   constructor(private readonly roDutiesService: RoDutiesService) {
     super(roDutiesService);
   }
