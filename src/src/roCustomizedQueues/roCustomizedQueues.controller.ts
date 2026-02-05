@@ -3,7 +3,9 @@ import { RoCustomizedQueuesDto } from 'src/generated/nestjs-dto/roCustomizedQueu
 import { UpdateRoCustomizedQueuesDto } from 'src/generated/nestjs-dto/update-roCustomizedQueues.dto';
 import { BaseController } from 'src/common/base.controller';
 import { Controller } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('RoCustomizedQueues')
 @Controller('ro-customized-queues')
 export class RoCustomizedQueuesController extends BaseController(
   RoCustomizedQueuesDto,

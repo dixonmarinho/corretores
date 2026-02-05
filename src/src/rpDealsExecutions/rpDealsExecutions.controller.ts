@@ -3,7 +3,9 @@ import { RpDealsExecutionsDto } from 'src/generated/nestjs-dto/rpDealsExecutions
 import { UpdateRpDealsExecutionsDto } from 'src/generated/nestjs-dto/update-rpDealsExecutions.dto';
 import { BaseController } from 'src/common/base.controller';
 import { Controller } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('RpDealsExecutions')
 @Controller('rp-deals-executions')
 export class RpDealsExecutionsController extends BaseController(
   RpDealsExecutionsDto,

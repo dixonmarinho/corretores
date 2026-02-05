@@ -3,7 +3,9 @@ import { StrategiesDto } from 'src/generated/nestjs-dto/strategies.dto';
 import { UpdateStrategiesDto } from 'src/generated/nestjs-dto/update-strategies.dto';
 import { BaseController } from 'src/common/base.controller';
 import { Controller } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Strategies')
 @Controller('strategies')
 export class StrategiesController extends BaseController(
   StrategiesDto,

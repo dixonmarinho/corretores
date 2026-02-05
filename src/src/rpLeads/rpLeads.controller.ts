@@ -3,7 +3,9 @@ import { RpLeadsDto } from 'src/generated/nestjs-dto/rpLeads.dto';
 import { UpdateRpLeadsDto } from 'src/generated/nestjs-dto/update-rpLeads.dto';
 import { BaseController } from 'src/common/base.controller';
 import { Controller } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('RpLeads')
 @Controller('rp-leads')
 export class RpLeadsController extends BaseController(
   RpLeadsDto,

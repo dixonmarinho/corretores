@@ -3,7 +3,9 @@ import { RoCustomizedPositionsDto } from 'src/generated/nestjs-dto/roCustomizedP
 import { UpdateRoCustomizedPositionsDto } from 'src/generated/nestjs-dto/update-roCustomizedPositions.dto';
 import { BaseController } from 'src/common/base.controller';
 import { Controller } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('RoCustomizedPositions')
 @Controller('ro-customized-positions')
 export class RoCustomizedPositionsController extends BaseController(
   RoCustomizedPositionsDto,

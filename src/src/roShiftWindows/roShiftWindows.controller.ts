@@ -3,7 +3,9 @@ import { RoShiftWindowsDto } from 'src/generated/nestjs-dto/roShiftWindows.dto';
 import { UpdateRoShiftWindowsDto } from 'src/generated/nestjs-dto/update-roShiftWindows.dto';
 import { BaseController } from 'src/common/base.controller';
 import { Controller } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('RoShiftWindows')
 @Controller('ro-shift-windows')
 export class RoShiftWindowsController extends BaseController(
   RoShiftWindowsDto,
