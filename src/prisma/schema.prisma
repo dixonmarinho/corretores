@@ -40,7 +40,6 @@ model agency_fallback_strategies {
   id             String     @id(map: "pk_agency_fallback_strategies") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   strategy_id    String     @db.Uuid
   fallback_order Int        @db.SmallInt
-  is_active      Boolean?   @default(true)
   strategies     strategies @relation(fields: [strategy_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
 }
 
@@ -147,7 +146,6 @@ model ro_customized_queues {
   source                  String?                   @default("CAMPAIGN_META") @db.VarChar
   description             String?                   @db.VarChar
   external_campaign_name  String?                   @db.VarChar
-  is_active               Boolean?                  @default(true)
   ro_customized_positions ro_customized_positions[]
   agencies                agencies                  @relation(fields: [agency_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_ro_customized_queues_agency_id")
   origins                 origins?                  @relation(fields: [origin_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_ro_customized_queues_origin_id")
@@ -174,8 +172,6 @@ model ro_duties {
   id               String             @id(map: "pk_ro_duties") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   agency_id        String             @db.Uuid
   code             String             @db.VarChar
-  is_active        Boolean?           @default(true)
-  is_default       Boolean?           @default(false)
   ro_daily_duties  ro_daily_duties[]
   agencies         agencies           @relation(fields: [agency_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_ro_duties_agency_id")
   ro_shift_types   ro_shift_types[]
@@ -203,13 +199,11 @@ model ro_duty_windows {
   id                String              @id(map: "pk_ro_duty_windows") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   daily_duty_id     String              @db.Uuid
   shift_window_id   String              @db.Uuid
-  is_active         Boolean?
   ro_duty_positions ro_duty_positions[]
   ro_daily_duties   ro_daily_duties     @relation(fields: [daily_duty_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_ro_duty_windows_daily_duty_id")
   ro_shift_windows  ro_shift_windows    @relation(fields: [shift_window_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_ro_duty_windows_shift_window_id")
 
   @@unique([daily_duty_id, shift_window_id], map: "uq_ro_duty_windows_daily_shift")
-  @@index([daily_duty_id, is_active], map: "ix_ro_duty_windows_active")
   @@index([shift_window_id], map: "ix_ro_duty_windows_shift")
 }
 
@@ -322,7 +316,6 @@ model rp_deals_agents {
   assigned_seq         Int         @db.SmallInt
   assigned_type        String?     @default("PRIMARY") @db.VarChar
   assigned_at          DateTime?   @default(now()) @db.Timestamptz(6)
-  is_active            Boolean?    @default(true)
   rp_attempts          rp_attempts @relation(fields: [accepted_attempt_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rp_deals_agents_attempt_id")
   rp_deals             rp_deals    @relation(fields: [deal_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rp_deals_agents_deal_id")
   profiles             profiles    @relation(fields: [profile_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rp_deals_agents_profile_id")
@@ -362,7 +355,6 @@ model strategies {
   description                String?
   is_singleton               Boolean
   fallback_enabled           Boolean?                     @default(true)
-  is_active                  Boolean?                     @default(true)
   agency_fallback_strategies agency_fallback_strategies[]
   rp_attempts                rp_attempts[]
   rp_deals                   rp_deals[]
