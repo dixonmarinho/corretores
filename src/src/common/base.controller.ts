@@ -8,7 +8,13 @@ import {
   Delete,
   Type, // Importante importar Type
 } from '@nestjs/common';
-import { ApiBody, ApiOkResponse } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiOkResponse,
+  ApiOperation,
+  ApiParam,
+  ApiResponse,
+} from '@nestjs/swagger';
 
 // Transformamos em uma função que recebe os Tipos (construtores) como argumento
 export function BaseController<C, U>(
@@ -25,12 +31,13 @@ export function BaseController<C, U>(
       return this.service.create(createDto);
     }
 
-    @Get()
+    @Get('/list-all')
     findAll() {
       return this.service.findAll();
     }
 
     @Get(':id')
+    @ApiOkResponse({ type: createDtoType }) // Agora usamos o valor real passado, não o genérico
     findOne(@Param('id') id: string) {
       return this.service.findOne(+id);
     }

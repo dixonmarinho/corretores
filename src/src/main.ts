@@ -17,7 +17,6 @@ async function bootstrap() {
       'Gerenciamento das posições na roleta de distribuição.',
     )
 
-
     // Core & Configurações
     .addTag(
       'Agencies',
