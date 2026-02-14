@@ -7,14 +7,4 @@ export class RoDailyDutiesDto {
     format: `date-time`,
   })
   roster_date: Date;
-  @ApiProperty({
-    type: `string`,
-    format: `date-time`,
-  })
-  created_at: Date;
-  @ApiProperty({
-    type: `string`,
-    format: `date-time`,
-  })
-  updated_at: Date | null;
 }

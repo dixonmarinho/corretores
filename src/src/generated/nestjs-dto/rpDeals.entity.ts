@@ -34,16 +34,6 @@ export class RpDeals {
   invalidated_at: Date | null;
   invalidation_reason: string | null;
   deal_status: string | null;
-  @ApiProperty({
-    type: `string`,
-    format: `date-time`,
-  })
-  created_at: Date;
-  @ApiProperty({
-    type: `string`,
-    format: `date-time`,
-  })
-  updated_at: Date | null;
   rp_attempts?: RpAttempts[];
   rp_deal_queues_rp_deal_queues_deal_idTorp_deals?: RpDealQueues | null;
   rp_deal_queues_rp_deal_queues_parent_deal_idTorp_deals?: RpDealQueues[];

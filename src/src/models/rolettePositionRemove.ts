@@ -12,5 +12,4 @@ export class rolettePositionRemove {
   @ApiProperty({ format: 'uuid' })
   @IsUUID('4')
   profileId: string;
-
 }

@@ -24,9 +24,4 @@ export class CreateRpDealsDto {
     default: `IN_QUEUE`,
   })
   deal_status?: string;
-  @ApiProperty({
-    type: `string`,
-    format: `date-time`,
-  })
-  updated_at?: Date;
 }

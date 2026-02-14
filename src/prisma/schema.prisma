@@ -24,8 +24,6 @@ model agencies {
   id                    String                  @id(map: "pk_agencies") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name                  String                  @unique(map: "uq_agencies_name") @db.VarChar
   crm_agency_id         Int                     @unique(map: "uq_agencies_crm_id")
-  created_at            DateTime                @default(now()) @db.Timestamptz(6)
-  updated_at            DateTime?               @db.Timestamptz(6)
   agency_settings       agency_settings[]
   audit_roulette_events audit_roulette_events[] @ignore
   notifications         notifications[]
@@ -43,16 +41,12 @@ model agency_fallback_strategies {
   strategy_id    String     @db.Uuid
   fallback_order Int        @db.SmallInt
   is_active      Boolean?   @default(true)
-  created_at     DateTime   @default(now()) @db.Timestamptz(6)
-  updated_at     DateTime?  @db.Timestamptz(6)
   strategies     strategies @relation(fields: [strategy_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
 }
 
 model agency_settings {
   id         String    @id(map: "pk_agency_settings") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   agency_id  String    @db.Uuid
-  created_at DateTime  @default(now()) @db.Timestamptz(6)
-  updated_at DateTime? @db.Timestamptz(6)
   agencies   agencies  @relation(fields: [agency_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
 }
 
@@ -81,12 +75,10 @@ model notifications {
   is_read             Boolean   @default(false)
   related_entity_type String?   @db.VarChar(50)
   related_entity_id   String?   @db.Uuid
-  created_at          DateTime  @default(now()) @db.Timestamptz(6)
   read_at             DateTime? @db.Timestamptz(6)
   agencies            agencies  @relation(fields: [agency_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_notifications_agency_id")
 
   @@index([agency_id, is_read], map: "idx_notifications_agency_is_read")
-  @@index([created_at], map: "idx_notifications_created_at")
   @@index([type, related_entity_type, related_entity_id], map: "idx_notifications_type_entity")
 }
 
@@ -95,8 +87,6 @@ model origins {
   agency_id            String                 @db.Uuid
   code                 String                 @db.VarChar
   description          String?                @db.VarChar
-  created_at           DateTime               @default(now()) @db.Timestamptz(6)
-  updated_at           DateTime?              @db.Timestamptz(6)
   agencies             agencies               @relation(fields: [agency_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_origins_agency_id")
   ro_customized_queues ro_customized_queues[]
   rp_deals             rp_deals[]
@@ -112,8 +102,6 @@ model profiles {
   name                                                   String
   avatar_url                                             String?
   crm_code                                               Int                       @unique(map: "uq_profiles_crm_code")
-  created_at                                             DateTime                  @default(now()) @db.Timestamptz(6)
-  updated_at                                             DateTime?                 @db.Timestamptz(6)
   agencies                                               agencies                  @relation(fields: [agency_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_profiles_agency_id")
   roles                                                  roles                     @relation(fields: [role_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_profiles_role_id")
   ro_customized_positions                                ro_customized_positions[]
@@ -129,8 +117,6 @@ model properties {
   id                   String                 @id(map: "pk_properties") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   agency_id            String                 @db.Uuid
   code                 String                 @db.VarChar
-  created_at           DateTime               @default(now()) @db.Timestamptz(6)
-  updated_at           DateTime?              @db.Timestamptz(6)
   agencies             agencies               @relation(fields: [agency_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_properties_agency_id")
   ro_customized_queues ro_customized_queues[]
   rp_deals             rp_deals[]
@@ -143,8 +129,6 @@ model ro_customized_positions {
   customized_queue_id  String               @db.Uuid
   profile_id           String               @db.Uuid
   position_order       Int
-  created_at           DateTime             @default(now()) @db.Timestamptz(6)
-  updated_at           DateTime?            @db.Timestamptz(6)
   profiles             profiles             @relation(fields: [profile_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_ro_customized_positions_profile_id")
   ro_customized_queues ro_customized_queues @relation(fields: [customized_queue_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_ro_customized_positions_queue_id")
 
@@ -164,8 +148,6 @@ model ro_customized_queues {
   description             String?                   @db.VarChar
   external_campaign_name  String?                   @db.VarChar
   is_active               Boolean?                  @default(true)
-  created_at              DateTime                  @default(now()) @db.Timestamptz(6)
-  updated_at              DateTime?                 @db.Timestamptz(6)
   ro_customized_positions ro_customized_positions[]
   agencies                agencies                  @relation(fields: [agency_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_ro_customized_queues_agency_id")
   origins                 origins?                  @relation(fields: [origin_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_ro_customized_queues_origin_id")
@@ -180,8 +162,6 @@ model ro_daily_duties {
   duty_id         String            @db.Uuid
   shift_type_id   String            @db.Uuid
   roster_date     DateTime          @db.Date
-  created_at      DateTime          @default(now()) @db.Timestamptz(6)
-  updated_at      DateTime?         @db.Timestamptz(6)
   ro_duties       ro_duties         @relation(fields: [duty_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_ro_daily_duties_duty_id")
   ro_shift_types  ro_shift_types    @relation(fields: [shift_type_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_ro_daily_duties_shift_type_id")
   ro_duty_windows ro_duty_windows[]
@@ -196,8 +176,6 @@ model ro_duties {
   code             String             @db.VarChar
   is_active        Boolean?           @default(true)
   is_default       Boolean?           @default(false)
-  created_at       DateTime           @default(now()) @db.Timestamptz(6)
-  updated_at       DateTime?          @db.Timestamptz(6)
   ro_daily_duties  ro_daily_duties[]
   agencies         agencies           @relation(fields: [agency_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_ro_duties_agency_id")
   ro_shift_types   ro_shift_types[]
@@ -212,8 +190,6 @@ model ro_duty_positions {
   duty_window_id  String          @db.Uuid
   profile_id      String          @db.Uuid
   position_order  Int
-  created_at      DateTime        @default(now()) @db.Timestamptz(6)
-  updated_at      DateTime?       @db.Timestamptz(6)
   profiles        profiles        @relation(fields: [profile_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_ro_duty_positions_profile_id")
   ro_duty_windows ro_duty_windows @relation(fields: [duty_window_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_ro_duty_positions_window_id")
 
@@ -228,8 +204,6 @@ model ro_duty_windows {
   daily_duty_id     String              @db.Uuid
   shift_window_id   String              @db.Uuid
   is_active         Boolean?
-  created_at        DateTime            @default(now()) @db.Timestamptz(6)
-  updated_at        DateTime?           @db.Timestamptz(6)
   ro_duty_positions ro_duty_positions[]
   ro_daily_duties   ro_daily_duties     @relation(fields: [daily_duty_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_ro_duty_windows_daily_duty_id")
   ro_shift_windows  ro_shift_windows    @relation(fields: [shift_window_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_ro_duty_windows_shift_window_id")
@@ -244,8 +218,6 @@ model ro_shift_types {
   duty_id          String             @db.Uuid
   code             String             @db.VarChar
   description      String?            @db.VarChar
-  created_at       DateTime           @default(now()) @db.Timestamptz(6)
-  updated_at       DateTime?          @db.Timestamptz(6)
   ro_daily_duties  ro_daily_duties[]
   ro_duties        ro_duties          @relation(fields: [duty_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_ro_shift_types_duty_id")
   ro_shift_windows ro_shift_windows[]
@@ -260,8 +232,6 @@ model ro_shift_windows {
   window_seq      Int               @db.SmallInt
   time_start      DateTime          @db.Time(6)
   time_end        DateTime          @db.Time(6)
-  created_at      DateTime          @default(now()) @db.Timestamptz(6)
-  updated_at      DateTime?         @db.Timestamptz(6)
   ro_duty_windows ro_duty_windows[]
   ro_duties       ro_duties         @relation(fields: [duty_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_ro_shift_windows_duty_id")
   ro_shift_types  ro_shift_types    @relation(fields: [shift_type_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_ro_shift_windows_shift_type_id")
@@ -273,8 +243,6 @@ model ro_shift_windows {
 model roles {
   id         String     @id(map: "pk_roles") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name       String     @unique(map: "uq_roles_name") @db.VarChar
-  created_at DateTime   @default(now()) @db.Timestamptz(6)
-  updated_at DateTime?  @db.Timestamptz(6)
   profiles   profiles[]
 }
 
@@ -289,7 +257,6 @@ model rp_attempts {
   attempt_type         String?          @default("PRIMARY") @db.VarChar
   observation_redirect String?
   sent_at              DateTime?        @default(now()) @db.Timestamptz(6)
-  created_at           DateTime         @default(now()) @db.Timestamptz(6)
   clicked_at           DateTime?        @db.Timestamptz(6)
   expired_at           DateTime?        @db.Timestamptz(6)
   status_link          String?          @default("WAITING") @db.VarChar
@@ -310,8 +277,6 @@ model rp_deal_queues {
   parent_deal_id                                   String?   @db.Uuid
   queue_type                                       String    @db.VarChar
   metadata                                         Json?
-  created_at                                       DateTime  @default(now()) @db.Timestamptz(6)
-  updated_at                                       DateTime? @db.Timestamptz(6)
   rp_deals_rp_deal_queues_deal_idTorp_deals        rp_deals  @relation("rp_deal_queues_deal_idTorp_deals", fields: [deal_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rp_deal_queues_deal_id")
   rp_leads                                         rp_leads  @relation(fields: [lead_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rp_deal_queues_lead_id")
   rp_deals_rp_deal_queues_parent_deal_idTorp_deals rp_deals? @relation("rp_deal_queues_parent_deal_idTorp_deals", fields: [parent_deal_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rp_deal_queues_parent_id")
@@ -335,8 +300,6 @@ model rp_deals {
   invalidated_at                                         DateTime?            @db.Timestamptz(6)
   invalidation_reason                                    String?
   deal_status                                            String?              @default("IN_QUEUE") @db.VarChar
-  created_at                                             DateTime             @default(now()) @db.Timestamptz(6)
-  updated_at                                             DateTime?            @db.Timestamptz(6)
   rp_attempts                                            rp_attempts[]
   rp_deal_queues_rp_deal_queues_deal_idTorp_deals        rp_deal_queues?      @relation("rp_deal_queues_deal_idTorp_deals")
   rp_deal_queues_rp_deal_queues_parent_deal_idTorp_deals rp_deal_queues[]     @relation("rp_deal_queues_parent_deal_idTorp_deals")
@@ -360,8 +323,6 @@ model rp_deals_agents {
   assigned_type        String?     @default("PRIMARY") @db.VarChar
   assigned_at          DateTime?   @default(now()) @db.Timestamptz(6)
   is_active            Boolean?    @default(true)
-  created_at           DateTime    @default(now()) @db.Timestamptz(6)
-  updated_at           DateTime?   @db.Timestamptz(6)
   rp_attempts          rp_attempts @relation(fields: [accepted_attempt_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rp_deals_agents_attempt_id")
   rp_deals             rp_deals    @relation(fields: [deal_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rp_deals_agents_deal_id")
   profiles             profiles    @relation(fields: [profile_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rp_deals_agents_profile_id")
@@ -373,8 +334,6 @@ model rp_deals_executions {
   deal_id         String    @unique(map: "uq_rp_deals_executions_deal_id") @db.Uuid
   log             String?
   additional_info String?
-  created_at      DateTime  @default(now()) @db.Timestamptz(6)
-  updated_at      DateTime? @db.Timestamptz(6)
   rp_deals        rp_deals  @relation(fields: [deal_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rp_deals_executions_deal_id")
 }
 
@@ -385,8 +344,6 @@ model rp_leads {
   name           String           @db.VarChar
   phone          String?          @db.VarChar
   email          String?          @db.VarChar
-  created_at     DateTime         @default(now()) @db.Timestamptz(6)
-  updated_at     DateTime?        @db.Timestamptz(6)
   rp_deal_queues rp_deal_queues[]
   rp_deals       rp_deals[]
   agencies       agencies         @relation(fields: [agency_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_rp_leads_agency_id")
@@ -406,8 +363,6 @@ model strategies {
   is_singleton               Boolean
   fallback_enabled           Boolean?                     @default(true)
   is_active                  Boolean?                     @default(true)
-  created_at                 DateTime                     @default(now()) @db.Timestamptz(6)
-  updated_at                 DateTime?                    @db.Timestamptz(6)
   agency_fallback_strategies agency_fallback_strategies[]
   rp_attempts                rp_attempts[]
   rp_deals                   rp_deals[]

@@ -9,9 +9,4 @@ export class UpdateProfilesDto {
     format: `int32`,
   })
   crm_code?: number;
-  @ApiProperty({
-    type: `string`,
-    format: `date-time`,
-  })
-  updated_at?: Date;
 }

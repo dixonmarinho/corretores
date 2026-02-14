@@ -22,16 +22,6 @@ export class RoShiftWindows {
     format: `date-time`,
   })
   time_end: Date;
-  @ApiProperty({
-    type: `string`,
-    format: `date-time`,
-  })
-  created_at: Date;
-  @ApiProperty({
-    type: `string`,
-    format: `date-time`,
-  })
-  updated_at: Date | null;
   ro_duty_windows?: RoDutyWindows[];
   ro_duties?: RoDuties;
   ro_shift_types?: RoShiftTypes;

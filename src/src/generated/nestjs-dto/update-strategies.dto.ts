@@ -14,9 +14,4 @@ export class UpdateStrategiesDto {
     default: true,
   })
   is_active?: boolean;
-  @ApiProperty({
-    type: `string`,
-    format: `date-time`,
-  })
-  updated_at?: Date;
 }

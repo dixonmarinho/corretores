@@ -17,14 +17,4 @@ export class RoShiftWindowsDto {
     format: `date-time`,
   })
   time_end: Date;
-  @ApiProperty({
-    type: `string`,
-    format: `date-time`,
-  })
-  created_at: Date;
-  @ApiProperty({
-    type: `string`,
-    format: `date-time`,
-  })
-  updated_at: Date | null;
 }

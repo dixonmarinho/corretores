@@ -15,11 +15,6 @@ export class Notifications {
     type: `string`,
     format: `date-time`,
   })
-  created_at: Date;
-  @ApiProperty({
-    type: `string`,
-    format: `date-time`,
-  })
   read_at: Date | null;
   agencies?: Agencies;
 }

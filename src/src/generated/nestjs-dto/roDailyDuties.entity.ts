@@ -12,16 +12,6 @@ export class RoDailyDuties {
     format: `date-time`,
   })
   roster_date: Date;
-  @ApiProperty({
-    type: `string`,
-    format: `date-time`,
-  })
-  created_at: Date;
-  @ApiProperty({
-    type: `string`,
-    format: `date-time`,
-  })
-  updated_at: Date | null;
   ro_duties?: RoDuties;
   ro_shift_types?: RoShiftTypes;
   ro_duty_windows?: RoDutyWindows[];

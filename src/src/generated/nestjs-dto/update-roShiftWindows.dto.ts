@@ -16,9 +16,4 @@ export class UpdateRoShiftWindowsDto {
     format: `date-time`,
   })
   time_end?: Date;
-  @ApiProperty({
-    type: `string`,
-    format: `date-time`,
-  })
-  updated_at?: Date;
 }

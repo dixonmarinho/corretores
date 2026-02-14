@@ -20,11 +20,6 @@ export class RpAttemptsDto {
     type: `string`,
     format: `date-time`,
   })
-  created_at: Date;
-  @ApiProperty({
-    type: `string`,
-    format: `date-time`,
-  })
   clicked_at: Date | null;
   @ApiProperty({
     type: `string`,

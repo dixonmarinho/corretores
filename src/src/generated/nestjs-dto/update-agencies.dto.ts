@@ -7,9 +7,4 @@ export class UpdateAgenciesDto {
     format: `int32`,
   })
   crm_agency_id?: number;
-  @ApiProperty({
-    type: `string`,
-    format: `date-time`,
-  })
-  updated_at?: Date;
 }

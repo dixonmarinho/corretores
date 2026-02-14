@@ -7,14 +7,4 @@ export class RoDutyPositionsDto {
     format: `int32`,
   })
   position_order: number;
-  @ApiProperty({
-    type: `string`,
-    format: `date-time`,
-  })
-  created_at: Date;
-  @ApiProperty({
-    type: `string`,
-    format: `date-time`,
-  })
-  updated_at: Date | null;
 }

@@ -1,4 +1,3 @@
-import { ApiProperty } from '@nestjs/swagger';
 import { RoCustomizedPositions } from './roCustomizedPositions.entity';
 import { Agencies } from './agencies.entity';
 import { Origins } from './origins.entity';
@@ -15,16 +14,6 @@ export class RoCustomizedQueues {
   description: string | null;
   external_campaign_name: string | null;
   is_active: boolean | null;
-  @ApiProperty({
-    type: `string`,
-    format: `date-time`,
-  })
-  created_at: Date;
-  @ApiProperty({
-    type: `string`,
-    format: `date-time`,
-  })
-  updated_at: Date | null;
   ro_customized_positions?: RoCustomizedPositions[];
   agencies?: Agencies;
   origins?: Origins | null;

@@ -1,4 +1,3 @@
-import { ApiProperty } from '@nestjs/swagger';
 import { AgencyFallbackStrategies } from './agencyFallbackStrategies.entity';
 import { RpAttempts } from './rpAttempts.entity';
 import { RpDeals } from './rpDeals.entity';
@@ -19,16 +18,6 @@ export class Strategies {
   is_singleton: boolean;
   fallback_enabled: boolean | null;
   is_active: boolean | null;
-  @ApiProperty({
-    type: `string`,
-    format: `date-time`,
-  })
-  created_at: Date;
-  @ApiProperty({
-    type: `string`,
-    format: `date-time`,
-  })
-  updated_at: Date | null;
   agency_fallback_strategies?: AgencyFallbackStrategies[];
   rp_attempts?: RpAttempts[];
   rp_deals?: RpDeals[];
