@@ -3,6 +3,7 @@ import { RolettePositionService } from './rolettePosition.service';
 import { rolettePosition } from 'src/models/rolettePosition';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { rolettePositionRemove } from 'src/models/rolettePositionRemove';
+import { rolettePositionAdd } from 'src/models/rolettePositionAdd';
 
 @ApiTags('RolettePosition')
 @Controller('rolette-position')
@@ -29,6 +30,18 @@ export class RolettePositionController {
       profileId: roletteposition.profileId,
       newPosition: roletteposition.newPosition,
     });
+  }
+
+  @ApiOperation({
+    summary: 'Adiciona Perfil na Roleta',
+    description:
+      'Este endpoint inclui um perfil em uma roleta (duty/custom/deal) na próxima posição disponível.',
+  })
+  @Post('add-profile')
+  async addProfile(
+    @Body() profileToAdd: rolettePositionAdd,
+  ): Promise<{ message: string }> {
+    return this.rolettePositionService.addProfileToPosition(profileToAdd);
   }
 
   @ApiOperation({

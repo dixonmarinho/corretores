@@ -9,12 +9,118 @@ interface MovePositionDto {
   newPosition?: number;
 }
 
+interface AddProfileDto {
+  contextType: 'DUTY_POSITION' | 'CUSTOM_QUEUE' | 'DEAL_ASSIGNMENT';
+  keyId: string;
+  profileId: string;
+}
+
 type CountResult = { count: string };
 type PositionResult = { profile_id: string; position_order: number };
+type IntegrityResponse = { sucessed?: boolean | string; message?: string };
+type JsonFunctionResult = { result: IntegrityResponse | null };
 
 @Injectable()
 export class RolettePositionService {
   constructor(private readonly prisma: PrismaService) {}
+
+  async addProfileToPosition({
+    contextType,
+    keyId,
+    profileId,
+  }: AddProfileDto): Promise<{ message: string }> {
+    if (
+      !['DUTY_POSITION', 'CUSTOM_QUEUE', 'DEAL_ASSIGNMENT'].includes(
+        contextType,
+      )
+    ) {
+      throw new BadRequestException(
+        'As opções válidas para contextType são DUTY_POSITION, CUSTOM_QUEUE e DEAL_ASSIGNMENT',
+      );
+    }
+
+    const table =
+      contextType === 'DUTY_POSITION'
+        ? 'ro_duty_positions'
+        : 'ro_customized_positions';
+    const fkTable =
+      contextType === 'DUTY_POSITION'
+        ? 'ro_duty_windows'
+        : 'ro_customized_queues';
+    const keyField =
+      contextType === 'DUTY_POSITION'
+        ? 'duty_window_id'
+        : 'customized_queue_id';
+
+    return this.prisma.$transaction(async (tx) => {
+      const integrityResult = await tx.$queryRawUnsafe<JsonFunctionResult[]>(
+        'SELECT public.fn_verify_cross_agency_integrity($1, $2::uuid, $3::uuid) as result',
+        contextType,
+        keyId,
+        profileId,
+      );
+
+      const integrityJson = integrityResult?.[0]?.result;
+      const notSucceeded =
+        integrityJson?.sucessed === false ||
+        integrityJson?.sucessed === 'false';
+
+      if (notSucceeded) {
+        throw new BadRequestException(
+          integrityJson?.message ||
+            'Falha na validação de integridade entre agência/perfil.',
+        );
+      }
+
+      const keyExists = await tx.$queryRawUnsafe<CountResult[]>(
+        `SELECT COUNT(*)::text as count FROM public.${fkTable} WHERE id = $1::uuid`,
+        keyId,
+      );
+
+      if (!keyExists[0] || Number(keyExists[0].count) === 0) {
+        throw new BadRequestException(
+          `O ID ${keyId} é inexistente para o tipo ${contextType}.`,
+        );
+      }
+
+      const profileExists = await tx.$queryRawUnsafe<CountResult[]>(
+        'SELECT COUNT(*)::text as count FROM public.profiles WHERE id = $1::uuid',
+        profileId,
+      );
+
+      if (!profileExists[0] || Number(profileExists[0].count) === 0) {
+        throw new BadRequestException(`O Perfil ${profileId} é inexistente.`);
+      }
+
+      const alreadyInserted = await tx.$queryRawUnsafe<CountResult[]>(
+        `SELECT COUNT(*)::text as count FROM public.${table} WHERE ${keyField} = $1::uuid AND profile_id = $2::uuid`,
+        keyId,
+        profileId,
+      );
+
+      if (Number(alreadyInserted[0]?.count || '0') > 0) {
+        throw new BadRequestException(
+          `Já existe um registro com este perfil para o ${contextType}.`,
+        );
+      }
+
+      const maxOrder = await tx.$queryRawUnsafe<{ next_order: number }[]>(
+        `SELECT COALESCE(MAX(position_order) + 1, 1) as next_order FROM public.${table} WHERE ${keyField} = $1::uuid`,
+        keyId,
+      );
+
+      const nextOrder = Number(maxOrder[0]?.next_order || 1);
+
+      await tx.$executeRawUnsafe(
+        `INSERT INTO public.${table} (${keyField}, profile_id, position_order) VALUES ($1::uuid, $2::uuid, $3)`,
+        keyId,
+        profileId,
+        nextOrder,
+      );
+
+      return { message: 'Perfil incluído com sucesso!' };
+    });
+  }
 
   /**
    * Move um profile para uma nova posição na fila, ajustando a ordem dos demais conforme necessário.
