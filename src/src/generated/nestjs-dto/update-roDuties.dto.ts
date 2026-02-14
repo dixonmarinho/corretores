@@ -1,4 +1,5 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiHideProperty, ApiProperty } from '@nestjs/swagger';
+import { Exclude } from 'class-transformer';
 
 export class UpdateRoDutiesDto {
   code?: string;
@@ -9,5 +10,7 @@ export class UpdateRoDutiesDto {
   @ApiProperty({
     default: false,
   })
+  @ApiHideProperty() // Esconde do Swagger
+  @Exclude()
   is_default?: boolean;
 }
