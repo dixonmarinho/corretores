@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class NotificationsDto {
-  id: string;
   type: string;
   title: string;
   message: string;

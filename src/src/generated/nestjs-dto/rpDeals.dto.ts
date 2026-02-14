@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class RpDealsDto {
-  id: string;
   outside_hours: boolean;
   interest: string | null;
   @ApiProperty({

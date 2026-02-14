@@ -1,5 +1,4 @@
 export class StrategiesDto {
-  id: string;
   code: string;
   strategy_type: string;
   name: string;

@@ -2,7 +2,6 @@ import { ApiHideProperty } from '@nestjs/swagger';
 import { Exclude } from 'class-transformer';
 
 export class RoDutiesDto {
-  id: string;
   code: string;
   @ApiHideProperty() // Esconde do Swagger
   @Exclude()

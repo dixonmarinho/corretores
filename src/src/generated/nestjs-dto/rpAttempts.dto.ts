@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class RpAttemptsDto {
-  id: string;
   path_link: string;
   message_id: string | null;
   @ApiProperty({

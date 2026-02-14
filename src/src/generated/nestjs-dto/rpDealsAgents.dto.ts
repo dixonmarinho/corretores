@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class RpDealsAgentsDto {
-  id: string;
   @ApiProperty({
     type: `integer`,
     format: `int32`,

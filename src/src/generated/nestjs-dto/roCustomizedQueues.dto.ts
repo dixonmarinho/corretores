@@ -1,5 +1,4 @@
 export class RoCustomizedQueuesDto {
-  id: string;
   code: string;
   source: string | null;
   description: string | null;
